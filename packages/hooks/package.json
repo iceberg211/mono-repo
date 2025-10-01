@@ -1,0 +1,12 @@
+{
+  "name": "@iceberg/hooks",
+  "version": "0.1.0",
+  "private": false,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "echo \"TODO: hooks 构建流程\"",
+    "lint": "echo \"TODO: hooks 代码检查\"",
+    "test": "echo \"TODO: hooks 测试\""
+  }
+}

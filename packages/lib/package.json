@@ -1,0 +1,12 @@
+{
+  "name": "@iceberg/lib",
+  "version": "0.1.0",
+  "private": false,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "echo \"TODO: lib 构建流程\"",
+    "lint": "echo \"TODO: lib 代码检查\"",
+    "test": "echo \"TODO: lib 测试\""
+  }
+}
