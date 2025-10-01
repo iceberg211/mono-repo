@@ -17,12 +17,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "microbundle --no-compress",
+    "build": "microbundle --format cjs,esm --generateTypes",
     "dev": "microbundle watch",
     "lint": "biome check ./src",
     "test": "jest --selectProjects lib"
-  },
-  "devDependencies": {
-    "microbundle": "^0.15.1"
   }
 }
