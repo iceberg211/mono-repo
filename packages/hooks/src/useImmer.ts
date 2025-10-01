@@ -8,11 +8,11 @@ import { produce, Draft } from 'immer';
  */
 export function useImmer<S = any>(
   initialValue: S | (() => S)
-): [S, (updater: (draft: Draft<S>) => void | S) => void] {
+): [S, (updater: (draft: Draft<S>) => void) => void] {
   const [state, setState] = useState(initialValue);
 
-  const updateState = useCallback((updater: (draft: Draft<S>) => void | S) => {
-    setState((prevState) => produce(prevState, updater));
+  const updateState = useCallback((updater: (draft: Draft<S>) => void) => {
+    setState((prevState) => produce(prevState, updater) as S);
   }, []);
 
   return [state, updateState];
