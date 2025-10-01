@@ -7,9 +7,9 @@
     "iceberg": "bin/iceberg.js"
   },
   "scripts": {
-    "build": "echo \"TODO: cli 构建流程\"",
-    "lint": "echo \"TODO: cli 代码检查\"",
-    "test": "echo \"TODO: cli 测试\""
+    "build": "node scripts/build.js",
+    "lint": "biome check ./src ./bin ./scripts",
+    "test": "node bin/iceberg.js --help"
   },
   "dependencies": {
     "@darkobits/lolcatjs": "^3.1.3",
