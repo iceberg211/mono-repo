@@ -5,9 +5,9 @@
   "main": "src/index.tsx",
   "types": "src/index.tsx",
   "scripts": {
-    "build": "echo \"TODO: ui 构建流程\"",
-    "lint": "echo \"TODO: ui 代码检查\"",
-    "test": "echo \"TODO: ui 测试\""
+    "build": "tsc -p tsconfig.json",
+    "lint": "biome check ./src",
+    "test": "jest --selectProjects ui"
   },
   "peerDependencies": {
     "react": "^18.0.0"

@@ -14,4 +14,8 @@ pnpm install
 pnpm run bootstrap
 ```
 
-> 当前各包的构建、测试、Lint 脚本仅为占位，后续可按需替换为真实命令。
+## 质量保障
+
+- 代码校验：`pnpm lint`（可加 `pnpm format` 自动修复）
+- 单元测试：`pnpm test`
+- 针对单个包执行测试示例：`pnpm --filter @iceberg/hooks test`
