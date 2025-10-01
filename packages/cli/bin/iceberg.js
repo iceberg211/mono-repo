@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-/**
- * 简易命令行入口，直接调用源码实现。
- */
 const { run } = require('../src/index.js');
 
-run();
+run(process.argv).catch((error) => {
+  console.error('Iceberg CLI 运行失败：', error.message);
+  process.exit(1);
+});

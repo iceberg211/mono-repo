@@ -1,6 +1,11 @@
-/**
- * 通用工具方法占位实现，后续可添加更多函数。
- */
-export const sum = (a: number, b: number) => {
-  return a + b;
-};
+// 字符串工具
+export * from './string';
+// 数组工具
+export * from './array';
+// 对象工具
+export * from './object';
+// 日期工具
+export * from './date';
+// 验证工具
+export * from './validate';
+
