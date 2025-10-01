@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "strict": true,
     "jsx": "react-jsx",
-    "types": ["node", "jest"]
+    "types": ["node", "jest", "react", "react-dom"]
   }
 }

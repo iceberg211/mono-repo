@@ -1,6 +1,8 @@
 const path = require('path');
 
-const createProject = ({ name, environment }) => ({
+const jsdomSetup = '<rootDir>/jest.setup.jsdom.ts';
+
+const createProject = ({ name, environment, setupFilesAfterEnv = [] }) => ({
   displayName: name,
   preset: 'ts-jest',
   testEnvironment: environment,
@@ -8,18 +10,22 @@ const createProject = ({ name, environment }) => ({
   moduleNameMapper: {
     '^@iceberg/(.*)$': '<rootDir>/packages/$1/src/index'
   },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: path.join('<rootDir>', `packages/${name}/tsconfig.json`)
-    }
-  }
+  setupFilesAfterEnv,
+  transform: {
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: path.join('<rootDir>', `packages/${name}/tsconfig.json`)
+      }
+    ]
+  },
+  testPathIgnorePatterns: ['/node_modules/', '/dist/']
 });
 
 module.exports = {
   projects: [
-    createProject({ name: 'hooks', environment: 'jsdom' }),
+    createProject({ name: 'hooks', environment: 'jsdom', setupFilesAfterEnv: [jsdomSetup] }),
     createProject({ name: 'lib', environment: 'node' }),
-    createProject({ name: 'ui', environment: 'jsdom' })
+    createProject({ name: 'ui', environment: 'jsdom', setupFilesAfterEnv: [jsdomSetup] })
   ]
 };
