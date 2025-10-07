@@ -1,0 +1,42 @@
+{
+  "name": "@iceberg/web3-hooks",
+  "version": "0.1.0",
+  "description": "React Hooks for Web3 development with Ethers.js",
+  "author": "Iceberg Team",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "microbundle --format cjs,esm --generateTypes",
+    "dev": "microbundle watch --format cjs,esm --generateTypes",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "ethers": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "web3",
+    "ethers",
+    "ethereum",
+    "blockchain",
+    "dapp"
+  ]
+}
