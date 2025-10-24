@@ -2,13 +2,19 @@
   "name": "@iceberg/cli",
   "version": "0.1.0",
   "private": false,
-  "main": "src/index.js",
+  "source": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
     "iceberg": "bin/iceberg.js"
   },
+  "files": [
+    "dist",
+    "bin"
+  ],
   "scripts": {
-    "build": "node scripts/build.js",
-    "lint": "biome check ./src ./bin ./scripts",
+    "build": "microbundle --format cjs --no-generateTypes --no-compress --external none",
+    "dev": "microbundle watch --format cjs --no-generateTypes --no-compress --external none",
+    "lint": "biome check ./src ./bin",
     "test": "node bin/iceberg.js --help"
   },
   "dependencies": {
@@ -19,5 +25,9 @@
     "ora": "^7.0.1",
     "quicktype-core": "^23.0.170",
     "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "microbundle": "^0.15.1"
   }
 }
