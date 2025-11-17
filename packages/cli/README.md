@@ -3,9 +3,11 @@
 Iceberg Monorepo 的命令行工具，提供基于 quicktype-core 的 TypeScript 类型生成能力。
 
 ## 功能概览
+
 - `quicktype`：从接口 JSON 返回快速生成 TypeScript 类型定义。
 
 ## 使用示例
+
 ```bash
 pnpm --filter @iceberg/cli exec iceberg quicktype \
   --input ./mock/user.json \
@@ -35,13 +37,13 @@ packages/cli/
 
 ### 核心技术栈
 
-| 依赖 | 用途 | 代码位置 |
-|------|------|----------|
-| **commander** | 命令行框架，解析参数和子命令 | `src/index.js:15-21` |
-| **inquirer** | 交互式提示（列表选择、文本输入、编辑器）| `src/commands/quicktype.js:51-96` |
-| **ora** | 终端加载动画 | `src/commands/quicktype.js:159` |
-| **figlet** + **lolcatjs** | 彩色 ASCII 横幅 | `src/banner.js:6-7` |
-| **shelljs** | 跨平台 shell 操作（文件检测、目录创建）| `src/commands/quicktype.js:71,168` |
+| 依赖                      | 用途                                     | 代码位置                           |
+| ------------------------- | ---------------------------------------- | ---------------------------------- |
+| **commander**             | 命令行框架，解析参数和子命令             | `src/index.js:15-21`               |
+| **inquirer**              | 交互式提示（列表选择、文本输入、编辑器） | `src/commands/quicktype.js:51-96`  |
+| **ora**                   | 终端加载动画                             | `src/commands/quicktype.js:159`    |
+| **figlet** + **lolcatjs** | 彩色 ASCII 横幅                          | `src/banner.js:6-7`                |
+| **shelljs**               | 跨平台 shell 操作（文件检测、目录创建）  | `src/commands/quicktype.js:71,168` |
 
 ### 开发新命令的完整流程
 
@@ -50,11 +52,11 @@ packages/cli/
 在 `src/commands/` 下创建新文件，例如 `yourCommand.js`：
 
 ```javascript
-const inquirer = require('inquirer');
-const ora = require('ora');
-const shell = require('shelljs');
-const fs = require('fs');
-const path = require('path');
+const inquirer = require("inquirer");
+const ora = require("ora");
+const shell = require("shelljs");
+const fs = require("fs");
+const path = require("path");
 
 /**
  * 解析命令行参数，缺失时启动交互式提示
@@ -66,14 +68,14 @@ async function resolveOptions(options) {
   if (!param1) {
     const { inputValue } = await inquirer.prompt([
       {
-        type: 'list',          // 单选列表
-        name: 'inputValue',
-        message: '请选择操作',
+        type: "list", // 单选列表
+        name: "inputValue",
+        message: "请选择操作",
         choices: [
-          { name: '选项 A', value: 'a' },
-          { name: '选项 B', value: 'b' }
-        ]
-      }
+          { name: "选项 A", value: "a" },
+          { name: "选项 B", value: "b" },
+        ],
+      },
     ]);
     param1 = inputValue;
   }
@@ -89,17 +91,17 @@ async function handleYourCommand(options) {
   const { param1 } = await resolveOptions(options);
 
   // 2. 显示加载动画
-  const spinner = ora('正在处理...').start();
+  const spinner = ora("正在处理...").start();
 
   try {
     // 3. 执行核心逻辑
     const result = await doSomething(param1);
 
-    spinner.succeed('处理完成');
-    console.log('\n====== 结果 ======');
+    spinner.succeed("处理完成");
+    console.log("\n====== 结果 ======");
     console.log(result);
   } catch (error) {
-    spinner.fail('处理失败');
+    spinner.fail("处理失败");
     console.error(error.message);
     process.exitCode = 1;
   }
@@ -110,10 +112,10 @@ async function handleYourCommand(options) {
  */
 function registerYourCommand(program) {
   program
-    .command('your-command')
-    .description('命令描述说明')
-    .option('-p, --param1 <value>', '参数说明')
-    .option('-o, --output <path>', '输出路径')
+    .command("your-command")
+    .description("命令描述说明")
+    .option("-p, --param1 <value>", "参数说明")
+    .option("-o, --output <path>", "输出路径")
     .action(async (options) => {
       await handleYourCommand(options);
     });
@@ -127,19 +129,19 @@ module.exports = { registerYourCommand };
 编辑 `src/index.js`，导入并注册新命令：
 
 ```javascript
-const { registerYourCommand } = require('./commands/yourCommand');
+const { registerYourCommand } = require("./commands/yourCommand");
 
 async function run(argv = process.argv) {
   printBanner();
 
   const program = new Command();
   program
-    .name('iceberg')
-    .description('Iceberg Monorepo 专用 CLI 工具')
+    .name("iceberg")
+    .description("Iceberg Monorepo 专用 CLI 工具")
     .version(pkg.version);
 
   registerQuicktypeCommand(program);
-  registerYourCommand(program);  // 新增注册
+  registerYourCommand(program); // 新增注册
 
   await program.parseAsync(argv);
 }
@@ -166,21 +168,21 @@ pnpm --filter @iceberg/cli exec iceberg your-command --help
 
 ```javascript
 async function resolveOptions(options) {
-  let value = options.input;  // 1. 优先使用命令行参数
+  let value = options.input; // 1. 优先使用命令行参数
 
   if (!value) {
     // 2. 参数缺失时启动交互式提示
     const { userInput } = await inquirer.prompt([
       {
-        type: 'input',
-        name: 'userInput',
-        message: '请输入值',
-        default: 'defaultValue',  // 3. 提供默认值
+        type: "input",
+        name: "userInput",
+        message: "请输入值",
+        default: "defaultValue", // 3. 提供默认值
         validate: (input) => {
           // 自定义验证逻辑
-          return input.trim() !== '' || '输入不能为空';
-        }
-      }
+          return input.trim() !== "" || "输入不能为空";
+        },
+      },
     ]);
     value = userInput;
   }
@@ -242,12 +244,12 @@ async function resolveOptions(options) {
 **1. 加载动画（参考 `src/commands/quicktype.js:159-178`）**
 
 ```javascript
-const spinner = ora('正在生成类型...').start();
+const spinner = ora("正在生成类型...").start();
 try {
   // 耗时操作
-  spinner.succeed('生成完成');
+  spinner.succeed("生成完成");
 } catch (error) {
-  spinner.fail('生成失败');
+  spinner.fail("生成失败");
   console.error(error.message);
 }
 ```
@@ -255,11 +257,11 @@ try {
 **2. 彩色横幅（参考 `src/banner.js`）**
 
 ```javascript
-const figlet = require('figlet');
-const lolcat = require('@darkobits/lolcatjs');
+const figlet = require("figlet");
+const lolcat = require("@darkobits/lolcatjs");
 
 function printBanner() {
-  const asciiArt = figlet.textSync('Iceberg CLI', { font: 'Slant' });
+  const asciiArt = figlet.textSync("Iceberg CLI", { font: "Slant" });
   console.log(lolcat.fromString(asciiArt));
 }
 ```
@@ -267,18 +269,18 @@ function printBanner() {
 **3. 文件操作（参考 `src/commands/quicktype.js:166-170`）**
 
 ```javascript
-const shell = require('shelljs');
-const fs = require('fs');
+const shell = require("shelljs");
+const fs = require("fs");
 
 // 检查文件是否存在
-if (shell.test('-f', filePath)) {
-  const content = fs.readFileSync(filePath, 'utf8');
+if (shell.test("-f", filePath)) {
+  const content = fs.readFileSync(filePath, "utf8");
 }
 
 // 创建目录并写入文件
 const targetDir = path.dirname(outputPath);
-shell.mkdir('-p', targetDir);
-fs.writeFileSync(outputPath, content, 'utf8');
+shell.mkdir("-p", targetDir);
+fs.writeFileSync(outputPath, content, "utf8");
 ```
 
 ### 错误处理规范
@@ -289,7 +291,7 @@ async function handleCommand(options) {
     // 业务逻辑
   } catch (error) {
     console.error(`错误：${error.message}`);
-    process.exitCode = 1;  // 设置退出码（非零表示失败）
+    process.exitCode = 1; // 设置退出码（非零表示失败）
   }
 }
 ```
@@ -298,7 +300,7 @@ async function handleCommand(options) {
 
 ```javascript
 run(process.argv).catch((error) => {
-  console.error('CLI 运行失败：', error.message);
+  console.error("CLI 运行失败：", error.message);
   process.exit(1);
 });
 ```

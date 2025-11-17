@@ -1,5 +1,5 @@
 {
-  "name": "@iceberg/web3-hooks",
+  "name": "@iceberg/ethers-hooks",
   "version": "0.1.0",
   "description": "React Hooks for Web3 development with Ethers.js",
   "author": "Iceberg Team",
