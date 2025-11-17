@@ -20,13 +20,16 @@ packages/
 ### 各包说明
 
 #### `@iceberg/cli`
+
 命令行工具，提供 TypeScript 类型生成功能。
 
 **主要功能**：
+
 - 从 JSON 快速生成 TypeScript 类型定义
 - 交互式命令行界面
 
 **使用示例**：
+
 ```bash
 pnpm --filter @iceberg/cli exec iceberg quicktype \
   --input ./data.json \
@@ -35,9 +38,11 @@ pnpm --filter @iceberg/cli exec iceberg quicktype \
 ```
 
 #### `@iceberg/hooks`
+
 React Hooks 工具集，基于 Immer 和常用模式封装。
 
 **包含 Hooks**：
+
 - `useImmer` - 不可变状态更新
 - `useToggle` - 布尔值切换
 - `useDebounce` - 防抖处理
@@ -48,8 +53,9 @@ React Hooks 工具集，基于 Immer 和常用模式封装。
 - `useUpdateEffect` - 仅更新时触发
 
 **使用示例**：
+
 ```tsx
-import { useImmer, useToggle } from '@iceberg/hooks';
+import { useImmer, useToggle } from "@iceberg/hooks";
 
 function MyComponent() {
   const [state, updateState] = useImmer({ count: 0 });
@@ -60,9 +66,11 @@ function MyComponent() {
 ```
 
 #### `@iceberg/lib`
+
 纯 TypeScript 工具函数库，无运行时依赖。
 
 **包含模块**：
+
 - **string** - 字符串处理（驼峰转换、截断、随机生成等）
 - **array** - 数组操作（去重、分组、分块、扁平化等）
 - **object** - 对象工具（深拷贝、合并、路径访问等）
@@ -72,34 +80,39 @@ function MyComponent() {
 - **browser** - 浏览器工具（Cookie、剪贴板、设备检测等）
 
 **使用示例**：
-```typescript
-import { camelToKebab, unique, deepClone, formatDate } from '@iceberg/lib';
 
-const kebabCase = camelToKebab('userName'); // 'user-name'
+```typescript
+import { camelToKebab, unique, deepClone, formatDate } from "@iceberg/lib";
+
+const kebabCase = camelToKebab("userName"); // 'user-name'
 const uniqueArr = unique([1, 2, 2, 3]); // [1, 2, 3]
 const cloned = deepClone({ a: 1, b: { c: 2 } });
-const formatted = formatDate(new Date(), 'YYYY-MM-DD'); // '2025-10-02'
+const formatted = formatDate(new Date(), "YYYY-MM-DD"); // '2025-10-02'
 ```
 
 #### `@iceberg/ui`
+
 React UI 组件库，基于 Radix UI Themes 和 Tailwind CSS。
 
 **特性**：
+
 - 🎨 高质量 Radix UI 组件封装
 - 🎯 Tailwind CSS 样式定制
 - 📖 Storybook 驱动开发
 - 🔧 完整 TypeScript 支持
 
 **包含组件**：
+
 - `Button` - 按钮（多种变体、颜色、尺寸）
 - `Card` - 卡片容器
 - `Input` - 输入框（支持变体和尺寸）
 
 **使用示例**：
+
 ```tsx
-import { Button, Card, Input } from '@iceberg/ui';
-import { Theme } from '@radix-ui/themes';
-import '@radix-ui/themes/styles.css';
+import { Button, Card, Input } from "@iceberg/ui";
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 
 function App() {
   return (
@@ -114,6 +127,7 @@ function App() {
 ```
 
 **开发组件**：
+
 ```bash
 cd packages/ui
 pnpm storybook  # 访问 http://localhost:6006
@@ -190,14 +204,15 @@ pnpm install
 
 ## 📦 构建系统
 
-| 包 | 构建工具 | 输出格式 | 说明 |
-|---|---|---|---|
-| cli | Node.js | CommonJS | 命令行脚本 |
+| 包    | 构建工具    | 输出格式        | 说明           |
+| ----- | ----------- | --------------- | -------------- |
+| cli   | Node.js     | CommonJS        | 命令行脚本     |
 | hooks | Microbundle | ESM + CJS + DTS | React Hooks 库 |
-| lib | Microbundle | ESM + CJS + DTS | 工具函数库 |
-| ui | Vite | ESM + CJS + DTS | React 组件库 |
+| lib   | Microbundle | ESM + CJS + DTS | 工具函数库     |
+| ui    | Vite        | ESM + CJS + DTS | React 组件库   |
 
 所有包都支持：
+
 - ✅ TypeScript 类型定义
 - ✅ Source Maps
 - ✅ Tree-shaking（ESM）
@@ -237,7 +252,7 @@ npm publish --access public
 ### 为什么需要私有仓库？
 
 - ✅ **快速迭代**：内部包更新即时可用
-- ✅ **私有保护**：@iceberg/* 包只在团队内部可见
+- ✅ **私有保护**：@iceberg/\* 包只在团队内部可见
 - ✅ **依赖缓存**：加速 npm 包安装
 - ✅ **离线开发**：本地缓存，网络不佳时也能使用
 
